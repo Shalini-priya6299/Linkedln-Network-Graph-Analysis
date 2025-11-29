@@ -1,4 +1,4 @@
-For report here's link: file:///C:/Users/INDIAN%20%20OIL/Downloads/LinkedIn_Network_Analysis_Report_ShaliniPriya.pdf
+For report here's link: (https://github.com/Shalini-priya6299/Linkedln-Network-Graph-Analysis/blob/main/LinkedIn_Network_Analysis_Report_ShaliniPriya.pdf)
 
 # LinkedIn Network Graph Analysis
 
