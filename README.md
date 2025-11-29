@@ -1,3 +1,5 @@
+For report here's link: file:///C:/Users/INDIAN%20%20OIL/Downloads/LinkedIn_Network_Analysis_Report_ShaliniPriya.pdf
+
 # LinkedIn Network Graph Analysis
 
 A reproducible project for building, analyzing, and visualizing professional network graphs (LinkedIn-style). This repository contains code, notebooks, and scripts to convert LinkedIn connection/export data into a graph, compute network metrics (centrality, community detection, shortest paths), and create interactive visualizations.
