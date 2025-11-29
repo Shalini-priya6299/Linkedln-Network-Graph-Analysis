@@ -17,7 +17,7 @@ def plot_degree_distribution(degree_file="data/degree.csv"):
     plt.savefig("data/degree_distribution.png")
     plt.close()
 
-    print("✔ Saved → data/degree_distribution.png")
+    print(" Saved --> data/degree_distribution.png")
 
 
 # -----------------------------------------------------------
@@ -116,14 +116,14 @@ def plot_industry_distribution(cleaned_folder="data/cleaned"):
 # 5. RUN ALL VISUALIZATIONS
 # -----------------------------------------------------------
 def generate_all_plots():
-    print("\n📊 Generating visualizations...\n")
+    print("\n Generating visualizations...\n")
 
     plot_degree_distribution()
     plot_top_students(top_n=10)
     plot_top_companies()
     plot_industry_distribution()
 
-    print("\n✨ All visualizations completed! Files saved inside /data/ folder.\n")
+    print("\n All visualizations completed! Files saved inside /data/ folder.\n")
 
 
 # Run directly (optional)

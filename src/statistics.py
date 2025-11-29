@@ -63,7 +63,7 @@ def graph_statistics():
     summary_df = pd.DataFrame(summary)
     summary_df.to_csv("data/network_statistics.csv", index=False)
 
-    print("\n✔ Statistics saved → data/network_statistics.csv\n")
+    print("\n Statistics saved → data/network_statistics.csv\n")
 
 
 if __name__ == "__main__":

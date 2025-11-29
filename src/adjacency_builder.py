@@ -15,14 +15,13 @@ def extract_name_column(df):
         if col in df_cols_lower:
             return df.columns[df_cols_lower.index(col)]
 
-    # fallback → first column
     return df.columns[0]
 
 
 def build_adjacency(cleaned_folder, adjacency_folder):
     """
     Converts each cleaned connection file into an adjacency list CSV
-    with *one column* → "connected_to"
+    with *one column* --> "connected_to"
     """
     if not os.path.exists(adjacency_folder):
         os.makedirs(adjacency_folder)
@@ -42,10 +41,10 @@ def build_adjacency(cleaned_folder, adjacency_folder):
             out_df = pd.DataFrame({"connected_to": connections})
             out_df.to_csv(out_path, index=False)
 
-            print(f"✔ Created adjacency → {file}")
+            print(f" Created adjacency --> {file}")
 
         except Exception as e:
-            print(f"❌ Failed for {file}: {e}")
+            print(f" Failed for {file}: {e}")
 
 
 if __name__ == "__main__":

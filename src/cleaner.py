@@ -26,7 +26,7 @@ def clean_all(input_dir, output_dir="cleaned_folder"):
             else:
                 df = pd.read_excel(file_path)
         except Exception as e:
-            print(f"❌ Could not read: {file_path} → {e}")
+            print(f" Could not read: {file_path} → {e}")
             continue
 
         # --- Normalize columns ---
@@ -52,7 +52,7 @@ def clean_all(input_dir, output_dir="cleaned_folder"):
 
         # If still no proper columns → skip this file
         if not (first_col and last_col):
-            print(f"⚠️ Skipping {file_path}: No name columns found.")
+            print(f" Skipping {file_path}: No name columns found.")
             continue
 
         # Company detection

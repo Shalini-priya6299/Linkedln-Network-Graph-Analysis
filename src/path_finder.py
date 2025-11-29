@@ -23,19 +23,19 @@ def find_path(student1, student2, edge_file="data/edges.csv"):
     G = load_graph(edge_file)
 
     print("\nSearching path between:")
-    print("→", student1)
-    print("→", student2)
+    print("-->", student1)
+    print("-->", student2)
 
     try:
         path = nx.shortest_path(G, source=student1, target=student2)
-        print("\n✔ Shortest Path Found:\n")
-        print(" → ".join(path))
+        print("\n Shortest Path Found:\n")
+        print(" --> ".join(path))
         return path
 
     except nx.NetworkXNoPath:
-        print("\n❌ No path exists between these students.")
+        print("\n No path exists between these students.")
     except nx.NodeNotFound as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
 
 
 if __name__ == "__main__":

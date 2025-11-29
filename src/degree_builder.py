@@ -43,10 +43,10 @@ def build_degrees(adjacency_folder="data/adjacency",
 
             degree_data.append((student_name, degree))
 
-            print(f"✔ {student_name}: {degree} connections")
+            print(f" {student_name}: {degree} connections")
 
         except Exception as e:
-            print(f"❌ Error in {file}: {e}")
+            print(f" Error in {file}: {e}")
 
     # create degree file
     degree_df = pd.DataFrame(degree_data, columns=["Student", "Degree"])
@@ -55,8 +55,8 @@ def build_degrees(adjacency_folder="data/adjacency",
 
     degree_df.to_csv(degree_output, index=False)
 
-    print(f"\n✨ Degree file saved → {degree_output}")
-    print(f"📁 Connected lists saved → {connections_output}")
+    print(f"\n Degree file saved → {degree_output}")
+    print(f" Connected lists saved → {connections_output}")
 
 
 if __name__ == "__main__":
