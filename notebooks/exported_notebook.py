@@ -1,29 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import os
 import pandas as pd
 import re
 
-# === SETUP: Your local folder path ===
+
 input_dir = r"C:\Users\INDIAN  OIL\Downloads\LinkedIn Data Public\LinkedIn Data Public"
 output_dir = "cleaned_folder"
 os.makedirs(output_dir, exist_ok=True)
 
-# === STEP 1: Find all CSV and XLSX files ===
+
 all_files = []
 for file in os.listdir(input_dir):
     if file.endswith('.csv') or file.endswith('.xlsx'):
         all_files.append(os.path.join(input_dir, file))
 
-# === STEP 2: Cleaning Function with Encoding & Column Check ===
+
 def clean_file(file_path):
     ext = os.path.splitext(file_path)[1]
 
-    # Try reading with UTF-8, fallback to ISO-8859-1
+    
     try:
         if ext == '.csv':
             try:
@@ -35,10 +29,9 @@ def clean_file(file_path):
     except Exception as e:
         raise Exception(f" Could not read file: {e}")
 
-    # Ensure required columns exist
     required_columns = {'First Name', 'Last Name', 'Company'}
     if not required_columns.issubset(df.columns):
-        # Handle the case where the columns don't exist or are mismatched
+
         print(f" Error in {file_path}: Missing required columns. Attempting auto-fix...")
 
         # Rename columns if needed
@@ -78,7 +71,7 @@ def clean_file(file_path):
     df.to_csv(out_path, index=False)
     return out_path
 
-# === STEP 3: Process All Files ===
+# Process All Files ===
 cleaned_paths = []
 for file_path in all_files:
     try:
@@ -91,18 +84,13 @@ print(f"\n Cleaned {len(cleaned_paths)} files.")
 print(f" Cleaned files saved in: {output_dir}")
 
 
-# In[ ]:
-
-
 import os
 import pandas as pd
 from collections import defaultdict
 
-# === Folder where each student CSV is stored ===
 adjacency_folder = "adjacency_folder1"
 degree_data = []
 
-# === Build degree data ===
 for file in os.listdir(adjacency_folder):
     if file.endswith(".csv"):
         student = file.replace(".csv", "").replace("_", " ")
@@ -126,15 +114,11 @@ degree_df.to_csv("student_degrees.csv", index=False, encoding="utf-8-sig")
 print(" Degree CSV saved as 'student_degrees.csv'")
 
 
-# In[4]:
-
-
 import os
 import pandas as pd
 from collections import defaultdict
 import random
 
-# === Step 1: Load Graph from Adjacency Folder ===
 def load_graph(adjacency_folder):
     graph = defaultdict(set)
     for file in os.listdir(adjacency_folder):
@@ -145,7 +129,7 @@ def load_graph(adjacency_folder):
             graph[person].update(connections)
     return graph
 
-# === Step 2: Random Walk Function (Allows Revisits) ===
+
 def random_walk(graph, start, end, max_steps=1000):
     if start not in graph or end not in graph:
         print(f" One or both students not found in the graph.")
@@ -168,7 +152,6 @@ def random_walk(graph, start, end, max_steps=1000):
 
     return walk if current == end else None
 
-# === Step 3: Try Multiple Random Walks ===
 def try_random_walks(graph, start, end, attempts=100, max_steps=1000):
     for i in range(attempts):
         walk = random_walk(graph, start, end, max_steps)
@@ -176,7 +159,7 @@ def try_random_walks(graph, start, end, attempts=100, max_steps=1000):
             return walk
     return None
 
-# === Step 4: Run Walk Between Two Students ===
+
 adjacency_folder = "adjacency_folder1"
 graph = load_graph(adjacency_folder)
 
@@ -191,12 +174,9 @@ if walk:
 else:
     print(" No random walk found after multiple attempts.")
 
-# === Optional Debug Info ===
+
 print(f"\n {start_student} connections:", graph.get(start_student, []))
 print(f" {end_student} connections:", graph.get(end_student, []))
-
-
-# In[5]:
 
 
 def prune_walk(walk):
@@ -231,16 +211,13 @@ else:
     print("  Nothing to prune.")
 
 
-# In[6]:
-
-
 import os
 import pandas as pd
 from collections import defaultdict
 import random
 import numpy as np
 
-# === Load Graph from Adjacency Folder ===
+
 def load_graph(adjacency_folder):
     graph = defaultdict(set)
     for file in os.listdir(adjacency_folder):
@@ -251,7 +228,7 @@ def load_graph(adjacency_folder):
             graph[person].update(connections)
     return graph
 
-# === Random Walk ===
+
 def random_walk(graph, start, end, max_steps=1000):
     if start not in graph or end not in graph:
         return None
@@ -271,7 +248,6 @@ def random_walk(graph, start, end, max_steps=1000):
 
     return walk if current == end else None
 
-# === Prune Random Walk to Direct Path ===
 def prune_walk(walk, start, end):
     if not walk:
         return []
@@ -282,7 +258,6 @@ def prune_walk(walk, start, end):
             break
     return path
 
-# === Perform Multiple Random Walks & Gather Lengths ===
 def try_random_walks(graph, start, end, attempts=100, max_steps=1000):
     walk_lengths = []
     pruned_lengths = []
@@ -295,7 +270,7 @@ def try_random_walks(graph, start, end, attempts=100, max_steps=1000):
     
     return walk_lengths, pruned_lengths
 
-# === Compute Statistics ===
+
 def compute_stats(lengths):
     if not lengths:
         return {"mean": None, "median": None, "std": None}
@@ -305,7 +280,7 @@ def compute_stats(lengths):
         "std": round(np.std(lengths), 2)
     }
 
-# === Run for a Pair of Students ===
+
 adjacency_folder = "adjacency_folder1"
 graph = load_graph(adjacency_folder)
 
@@ -318,18 +293,16 @@ walk_stats = compute_stats(walk_lengths)
 pruned_stats = compute_stats(pruned_lengths)
 
 # === Output the Stats ===
-print(f"📊 Random Walk Stats between '{start_student}' and '{end_student}':")
+print(f" Random Walk Stats between '{start_student}' and '{end_student}':")
 print("  - Mean Length:", walk_stats["mean"])
 print("  - Median Length:", walk_stats["median"])
 print("  - Std Deviation:", walk_stats["std"])
 
-print(f"\n🌿 Pruned Path Stats:")
+print(f"\n Pruned Path Stats:")
 print("  - Mean Length:", pruned_stats["mean"])
 print("  - Median Length:", pruned_stats["median"])
 print("  - Std Deviation:", pruned_stats["std"])
 
-
-# In[7]:
 
 
 import os
@@ -433,12 +406,12 @@ walk_stats = compute_stats(walk_lengths)
 pruned_stats = compute_stats(pruned_lengths)
 
 # === Output the Results ===
-print(f"📊 Random Walk Stats between '{start_student}' and '{end_student}':")
+print(f" Random Walk Stats between '{start_student}' and '{end_student}':")
 print("  - Mean Length:", walk_stats["mean"])
 print("  - Median Length:", walk_stats["median"])
 print("  - Std Deviation:", walk_stats["std"])
 
-print(f"\n🌿 Pruned Path Stats:")
+print(f"\n Pruned Path Stats:")
 print("  - Mean Length:", pruned_stats["mean"])
 print("  - Median Length:", pruned_stats["median"])
 print("  - Std Deviation:", pruned_stats["std"])
@@ -548,19 +521,15 @@ walk_stats = compute_stats(walk_lengths)
 pruned_stats = compute_stats(pruned_lengths)
 
 # === Output the Results ===
-print(f"📊 Random Walk Stats between '{start_student}' and '{end_student}':")
+print(f" Random Walk Stats between '{start_student}' and '{end_student}':")
 print("  - Mean Length:", walk_stats["mean"])
 print("  - Median Length:", walk_stats["median"])
 print("  - Std Deviation:", walk_stats["std"])
 
-print(f"\n🌿 Pruned Path Stats:")
+print(f"\n Pruned Path Stats:")
 print("  - Mean Length:", pruned_stats["mean"])
 print("  - Median Length:", pruned_stats["median"])
 print("  - Std Deviation:", pruned_stats["std"])
-
-
-# In[ ]:
-
 
 
 

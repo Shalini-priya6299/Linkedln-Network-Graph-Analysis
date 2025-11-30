@@ -42,7 +42,7 @@ def clean_all(input_dir, output_dir="cleaned_folder"):
         last_col = next((c for c in possible_last if c in df.columns), None)
         full_col = next((c for c in possible_full if c in df.columns), None)
 
-        # If Full Name exists → split into first/last
+    
         if full_col and not (first_col and last_col):
             df["Full Name"] = df[full_col].astype(str)
             parts = df["Full Name"].str.split(" ", n=1, expand=True)
@@ -50,7 +50,6 @@ def clean_all(input_dir, output_dir="cleaned_folder"):
             df["Last Name"] = parts[1] if parts.shape[1] > 1 else ""
             first_col, last_col = "First Name", "Last Name"
 
-        # If still no proper columns → skip this file
         if not (first_col and last_col):
             print(f" Skipping {file_path}: No name columns found.")
             continue
@@ -82,7 +81,7 @@ def clean_all(input_dir, output_dir="cleaned_folder"):
 
         cleaned_paths.append(out_path)
 
-    print(f"\n✨ Cleaned {len(cleaned_paths)} files successfully.")
+    print(f"\n Cleaned {len(cleaned_paths)} files successfully.")
     return cleaned_paths
 
 

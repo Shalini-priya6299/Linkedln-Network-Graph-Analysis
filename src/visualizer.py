@@ -2,9 +2,9 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# -----------------------------------------------------------
+
 # 1. DEGREE DISTRIBUTION
-# -----------------------------------------------------------
+
 def plot_degree_distribution(degree_file="data/degree.csv"):
     df = pd.read_csv(degree_file)
 
@@ -20,9 +20,9 @@ def plot_degree_distribution(degree_file="data/degree.csv"):
     print(" Saved --> data/degree_distribution.png")
 
 
-# -----------------------------------------------------------
+
 # 2. TOP CONNECTED STUDENTS
-# -----------------------------------------------------------
+
 def plot_top_students(degree_file="data/degree.csv", top_n=10):
     df = pd.read_csv(degree_file)
     top = df.sort_values(by="Degree", ascending=False).head(top_n)
@@ -36,12 +36,12 @@ def plot_top_students(degree_file="data/degree.csv", top_n=10):
     plt.savefig("data/top_students.png")
     plt.close()
 
-    print("✔ Saved → data/top_students.png")
+    print(" Saved --> data/top_students.png")
 
 
-# -----------------------------------------------------------
+
 # 3. TOP COMPANIES (Count in network)
-# -----------------------------------------------------------
+
 def plot_top_companies(cleaned_folder="data/cleaned"):
     companies = []
 
@@ -64,9 +64,9 @@ def plot_top_companies(cleaned_folder="data/cleaned"):
     print("✔ Saved → data/top_companies.png")
 
 
-# -----------------------------------------------------------
+
 # 4. INDUSTRY DISTRIBUTION GRAPH
-# -----------------------------------------------------------
+
 def plot_industry_distribution(cleaned_folder="data/cleaned"):
     industries = {
         "Tech": 0,
@@ -109,12 +109,12 @@ def plot_industry_distribution(cleaned_folder="data/cleaned"):
     plt.savefig("data/industry_distribution.png")
     plt.close()
 
-    print("✔ Saved → data/industry_distribution.png")
+    print(" Saved --> data/industry_distribution.png")
 
 
-# -----------------------------------------------------------
+
 # 5. RUN ALL VISUALIZATIONS
-# -----------------------------------------------------------
+
 def generate_all_plots():
     print("\n Generating visualizations...\n")
 
@@ -125,7 +125,5 @@ def generate_all_plots():
 
     print("\n All visualizations completed! Files saved inside /data/ folder.\n")
 
-
-# Run directly (optional)
 if __name__ == "__main__":
     generate_all_plots()

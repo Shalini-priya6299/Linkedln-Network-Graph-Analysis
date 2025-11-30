@@ -33,14 +33,14 @@ def build_graph(adjacency_folder="data/adjacency", output_edges="data/edges.csv"
             except Exception as e:
                 print(f" Error reading {file}: {e}")
 
-    # convert to DataFrame EXACTLY LIKE notebook
+
     edges_df = pd.DataFrame(edges, columns=["Source", "Target"])
     edges_df.drop_duplicates(inplace=True)
 
     # save
     edges_df.to_csv(output_edges, index=False, encoding="utf-8-sig")
 
-    print(f" edges.csv created → {output_edges}")
+    print(f" edges.csv created --> {output_edges}")
     print(f"Total edges: {len(edges_df)}")
 
 
